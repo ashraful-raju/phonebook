@@ -27,4 +27,8 @@ Login -> Dashboard -> List -> Add/Update/Delete -> Logout
 |-- data/contacts.json
 |-- data/users.json
 
+## Design Reference
 
+-   https://github.com/tailwindcomponents/dashboard/
+-   https://tailwindcss.com/
+-   https://flowbite.com/docs/forms/input-field/
