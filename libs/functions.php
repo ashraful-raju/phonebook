@@ -18,6 +18,12 @@ if (!function_exists('dd')) {
     }
 }
 
+if (!function_exists('is_GET')) {
+    function is_GET()
+    {
+        return $_SERVER['REQUEST_METHOD'] === 'GET';
+    }
+}
 if (!function_exists('is_post')) {
     function is_post()
     {
@@ -44,15 +50,15 @@ if (!function_exists('is_loggedin')) {
 }
 
 if (!function_exists('redirect')) {
-    function redirect($path)
+    function redirect($path = "")
     {
         header('Location: /' . $path);
         die;
     }
 }
 
-if (!function_exists('senitize')) {
-    function senitize($value)
+if (!function_exists('sanitize')) {
+    function sanitize($value)
     {
         return filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
     }
