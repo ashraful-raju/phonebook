@@ -8,7 +8,7 @@ if (is_loggedin()) {
 require_once 'inc/header.php';
 ?>
 
-<div class="flex justify-center items-center bg-gray-200 pt-10 pb-10 px-6">
+<div class="flex justify-center items-center py-10 px-6">
     <div class="p-6 max-w-sm w-full bg-white shadow-md rounded-md">
         <div class="flex justify-center items-center">
             <svg class="h-10 w-10" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">

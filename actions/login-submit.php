@@ -10,7 +10,7 @@ if (is_GET()) {
     $user = getUserBy($email);
 
     if ($user && $user['password'] == md5($password)) {
-        set_login(true);
+        set_login(true, $user['email']);
         redirect(''); // redirect to dashboard /index.php
     } else {
         $_SESSION['error'] = 'Email or Password did not match';

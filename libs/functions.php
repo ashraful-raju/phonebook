@@ -31,13 +31,22 @@ if (!function_exists('is_post')) {
     }
 }
 
-if (!function_exists('set_login')) {
-    function set_login($status)
+if (!function_exists('get_login_email')) {
+    function get_login_email()
     {
-        if ($status == true) {
+        return $_SESSION['login_email'] ?? '';
+    }
+}
+
+if (!function_exists('set_login')) {
+    function set_login($status, $email = null)
+    {
+        if ($status == true && $email) {
             $_SESSION['loggedin'] = true;
+            $_SESSION['login_email'] = $email;
         } else {
             unset($_SESSION['loggedin']);
+            unset($_SESSION['login_email']);
         }
     }
 }
@@ -61,5 +70,21 @@ if (!function_exists('sanitize')) {
     function sanitize($value)
     {
         return filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
+    }
+}
+
+if (!function_exists('uploadFile')) {
+    function uploadFile($file, $name = null)
+    {
+        if (isset($file)) {
+            $originalName = basename($file['name']);
+            $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+            $name = $name ? "$name.$extension" : null;
+            $imagePath = '/uploads/' . $name ?? $originalName;
+            move_uploaded_file($file['tmp_name'], BASE_DIR . $imagePath);
+            return $imagePath;
+        }
+
+        return null;
     }
 }

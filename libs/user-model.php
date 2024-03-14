@@ -23,6 +23,26 @@ if (!function_exists('addUser')) {
     }
 }
 
+
+// function for add users add put them to user data
+if (!function_exists('updateUser')) {
+    function updateUser($email, $user = [])
+    {
+        $users = array_map(function ($item) use ($email, $user) {
+            if ($item['email'] == $email) {
+                return array_merge($item, $user);
+            }
+
+            return $item;
+        }, getUsers());
+
+        file_put_contents(
+            BASE_DIR . DS . 'data/users.json',
+            json_encode($users)
+        );
+    }
+}
+
 // function for searching user in data file 
 if (!function_exists('getUserBy')) {
     function getUserBy($email)
