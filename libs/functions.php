@@ -73,14 +73,21 @@ if (!function_exists('sanitize')) {
     }
 }
 
+if (!function_exists('getProfilePictureUrl')) {
+    function getProfilePictureUrl($path, $name = "")
+    {
+        return $path ?? 'https://ui-avatars.com/api/?name=' . $name;
+    }
+}
+
 if (!function_exists('uploadFile')) {
     function uploadFile($file, $name = null)
     {
         if (isset($file)) {
             $originalName = basename($file['name']);
             $extension = pathinfo($originalName, PATHINFO_EXTENSION);
-            $name = $name ? "$name.$extension" : null;
-            $imagePath = '/uploads/' . $name ?? $originalName;
+            $name = $name ? "$name.$extension" : $originalName;
+            $imagePath = '/uploads/' . $name;
             move_uploaded_file($file['tmp_name'], BASE_DIR . $imagePath);
             return $imagePath;
         }
