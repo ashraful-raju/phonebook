@@ -2,7 +2,7 @@
 require_once '../init.php';
 
 if (is_post()) {
-    $searchNumber = sanitize($_GET['number'] ?? '');
+    $searchNumber = sanitize($_GET['number'] ?? $_POST['phone-number']);
     $item = getContactBy('number', $searchNumber);
 
     $contactArr = generateContact(
@@ -16,7 +16,7 @@ if (is_post()) {
 
     updateContact($searchNumber, $contactArr);
 
-    $_SESSION['message'] = 'Profile updated successfully!';
+    $_SESSION['message'] = 'Contact updated successfully!';
 }
 
-redirect('profile.php');
+redirect('list-contact.php');

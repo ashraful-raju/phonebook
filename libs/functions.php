@@ -83,7 +83,7 @@ if (!function_exists('getProfilePictureUrl')) {
 if (!function_exists('uploadFile')) {
     function uploadFile($file, $name = null)
     {
-        if (isset($file)) {
+        if ($file['tmp_name'] ?? false) {
             $originalName = basename($file['name']);
             $extension = pathinfo($originalName, PATHINFO_EXTENSION);
             $name = $name ? "$name.$extension" : $originalName;

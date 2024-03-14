@@ -1,5 +1,6 @@
-<div x-cloak tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 bg-black bg-opacity-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" :class="modal_<?= $contact['number'] ?> ? 'flex' : 'hidden'">
-    <div class="relative p-4 w-full max-w-md max-h-full">
+<div x-cloak tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 pb-4 justify-center items-center w-full md:inset-0 max-h-full" :class="modal_<?= $contact['number'] ?> ? 'flex' : 'hidden'">
+    <div x-cloak x-show="modal_<?= $contact['number'] ?>" @click="modal_<?= $contact['number'] ?> = false" class="fixed inset-0 z-10 w-full h-full bg-black bg-opacity-50"></div>
+    <div class="relative p-4 w-full max-w-md max-h-full z-20">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
@@ -16,7 +17,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5">
-                <form action="actions/add-contact.php" method="post" enctype="multipart/form-data">
+                <form action="actions/update-contact.php?number=<?= $contact['number'] ?>" method="post" enctype="multipart/form-data">
 
                     <label class="block">
                         <span class="text-gray-700 text-sm">Full Name:</span>

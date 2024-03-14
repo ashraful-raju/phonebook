@@ -7,11 +7,24 @@ if (!is_loggedin()) {
 
 $contacts = getContacts();
 
+if (isset($_GET['search']) && $_GET['search']) {
+    $search = sanitize($_GET['search']);
+    $contacts = array_filter(
+        $contacts,
+        fn ($item) => str_contains($item['name'], $search) || str_contains($item['number'], $search) || str_contains($item['email'], $search)
+    );
+}
+
 require_once 'inc/header.php'
 ?>
 
 <!-- Main Content Start -->
-<h3 class="text-gray-700 text-3xl mt-4 font-medium">Contact List</h3>
+<div class="flex justify-between items-end">
+    <h3 class="text-gray-700 text-3xl mt-4 font-medium">
+        <?= isset($_GET['search']) ? "Search Results..." : "Contact List" ?>
+    </h3>
+    <a href="create-contact.php" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-3 py-2 text-center ">Add Contact</a>
+</div>
 <?= showAlert('message') ?>
 <div class="flex flex-col mt-8">
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -62,7 +75,7 @@ require_once 'inc/header.php'
                                 <button @click="modal_<?= $contact['number'] ?> = !modal_<?= $contact['number'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</button>
                                 <span class="mx-1">|</span>
                                 <a href="/actions/delete-contact.php?number=<?= $contact['number'] ?>" onclick="return confirm('Are you sure?')" class="text-rose-600 hover:text-rose-900">Delete</a>
-                                <?php require_once 'inc/edit-modal.php' ?>
+                                <?php include 'inc/edit-modal.php' ?>
                             </td>
                         </tr>
                     <?php
