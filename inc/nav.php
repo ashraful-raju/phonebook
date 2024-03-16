@@ -30,7 +30,7 @@ $user = getUserBy(get_login_email());
         <div x-data="{ dropdownOpen: false }" class="relative flex items-center justify-center">
             <strong class="pr-2"><?= $user['name'] ?? '' ?></strong>
             <button @click="dropdownOpen = ! dropdownOpen" class="relative block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none">
-                <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80" alt="Your avatar">
+                <img class="object-cover w-full h-full" src="<?= getProfilePictureUrl($user['profile-image' ?? ''], $user['name']) ?>" alt="Your avatar">
             </button>
 
             <div x-cloak x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>

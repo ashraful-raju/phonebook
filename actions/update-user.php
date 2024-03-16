@@ -6,6 +6,7 @@ if (is_post()) {
     $email = sanitize($_POST['email']);
     $password = sanitize($_POST['password']);
     $retypePassword = sanitize($_POST['retype-password']);
+    $profileImage = uploadFile($_FILES['profile-image'] ?? null, md5(get_login_email()));
 
     $user = getUserBy(get_login_email());
 
@@ -14,9 +15,13 @@ if (is_post()) {
     }
     if ($email) {
         $user['email'] = $email;
+        set_login(true, $email);
     }
     if ($password && $password === $retypePassword) {
         $user['password'] = md5($password);
+    }
+    if ($profileImage) {
+        $user['profile-image'] = $profileImage;
     }
 
     updateUser(get_login_email(), $user);

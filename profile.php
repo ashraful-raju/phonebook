@@ -13,7 +13,7 @@ require_once 'inc/header.php'
 <!-- Main Content Start -->
 <div class="flex flex-col mt-8 max-w-md">
     <h1 class="text-2xl font-bold">Profile</h1>
-    <form class="mt-6" action="actions/update-user.php" method="post">
+    <form class="mt-6" action="actions/update-user.php" method="post" enctype="multipart/form-data">
         <?php if (isset($_SESSION['message'])) : ?>
             <div class="border-l border-l-4 my-2 border-blue-500 bg-white py-4 px-2 bg-gray-200">
                 <?php
@@ -40,6 +40,10 @@ require_once 'inc/header.php'
         <label class="block mt-3">
             <span class="text-gray-700 text-sm">Retype Password:</span>
             <input type="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Retype Your Password" name="retype-password">
+        </label>
+        <label class="block mt-3">
+            <span class="text-gray-700 text-sm">Profile Image:</span>
+            <input type="file" class="border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" accept="image/*" name="profile-image">
         </label>
 
         <div class="flex mt-3 justify-between">
